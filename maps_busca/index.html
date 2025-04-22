@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Busca de Empresas no Google Maps</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #00b894;
+      color: white;
+      border: none;
+      margin-top: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #019875;
+    }
+  </style>
+</head>
+<body>
+
+  <form action="https://n8n.torneio.space:5678/webhook/google-maps-busca" method="POST">
+    <h2>Buscar Empresas no Google Maps</h2>
+
+    <label for="termo">O que você está procurando?</label>
+    <input type="text" id="termo" name="termo" placeholder="Ex: padarias, açougues" required>
+
+    <label for="cidade">Cidade</label>
+    <input type="text" id="cidade" name="cidade" placeholder="Ex: Sorocaba, Recife" required>
+
+    <button type="submit">Buscar</button>
+  </form>
+
+</body>
+</html>
