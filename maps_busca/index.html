@@ -41,11 +41,18 @@
     button:hover {
       background: #019875;
     }
+    .mensagem {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 16px;
+      color: green;
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <form action="https://n8n.torneio.space:5678/webhook/google-maps-busca" method="POST">
+  <form id="formulario-busca">
     <h2>Buscar Empresas no Google Maps</h2>
 
     <label for="termo">O que você está procurando?</label>
@@ -56,6 +63,39 @@
 
     <button type="submit">Buscar</button>
   </form>
+
+  <div class="mensagem" id="mensagem-sucesso">
+    ✅ Sua busca foi enviada com sucesso! Os dados estão sendo processados.
+  </div>
+
+  <script>
+    const form = document.getElementById("formulario-busca");
+    const mensagem = document.getElementById("mensagem-sucesso");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const termo = document.getElementById("termo").value;
+      const cidade = document.getElementById("cidade").value;
+
+      const response = await fetch("https://n8n.torneio.space:5678/webhook/google-maps-busca", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({ termo, cidade }),
+      });
+
+      if (response.ok) {
+        mensagem.style.display = "block";
+        form.reset();
+      } else {
+        mensagem.style.display = "block";
+        mensagem.style.color = "red";
+        mensagem.innerText = "❌ Ocorreu um erro ao enviar sua busca.";
+      }
+    });
+  </script>
 
 </body>
 </html>
